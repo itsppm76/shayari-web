@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shayari NHE-01 | Your Companion from Far Land</title>
+    <meta name="description" content="Meet Shayari NHE-01, a digital companion designed for long-term memory, voice conversation, shared photos, and an evolving personal relationship.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Shayari NHE-01 | Your Companion from Far Land">
+    <meta property="og:description" content="A unique digital companion built to remember what matters and grow closer to you over time.">
+    <meta property="og:image" content="https://res.cloudinary.com/dc1ghwwhg/image/upload/v1787414004/openart-image_1785644354951_222e2341_1785644356530_cef4a78c_exhbyd.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#FDFBF7',
+                        champagne: '#F4EBE1',
+                        charcoal: '#1A1818',
+                        darkbg: '#0E0D0F',
+                        darkcard: '#17151A',
+                        darkborder: '#2A262E',
+                        mauve: '#9E7B83',
+                        rose: '#D8A49B',
+                        burgundy: '#6B2D38',
+                        lavender: '#EFEBF4',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Newsreader', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Styling & Fine Micro-Animations */
+        body {
+            background-color: #FDFBF7;
+            color: #1A1818;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-serif-italic {
+            font-family: 'Newsreader', serif;
+            font-style: italic;
+        }
+
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card-dark {
+            background: rgba(23, 21, 26, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(26, 24, 24, 0.06);
+        }
+
+        /* Glow Effects */
+        .glow-burgundy {
+            box-shadow: 0 0 50px -10px rgba(107, 45, 56, 0.25);
+        }
+
+        .glow-rose {
+            box-shadow: 0 0 60px -15px rgba(216, 164, 155, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9E7B83;
+            border-radius: 4px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           v1.3 MOTION LAYER — announcement ticker, scroll
+           reveals, aurora drift, shimmer, tilt, grain.
+           Everything below is purely decorative and is fully
+           disabled under prefers-reduced-motion (see the
+           media query at the end of this block).
+           ══════════════════════════════════════════════════ */
+
+        /* Anchor offset so the fixed bar + nav never cover a section heading */
+        section[id] { scroll-margin-top: 8.5rem; }
+
+        /* --- Live announcement ticker --- */
+        .ticker-track {
+            display: inline-flex;
+            white-space: nowrap;
+            will-change: transform;
+            animation: ticker-scroll 38s linear infinite;
+        }
+        .ticker-mask:hover .ticker-track { animation-play-state: paused; }
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-mask {
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+
+        /* --- Scroll progress meter --- */
+        #scroll-progress {
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            transition: transform 0.08s linear;
+        }
+
+        /* --- Reveal on scroll ---
+           Reveals are OPT-IN: the hidden state only applies once JS has
+           added .motion-ready to <html>. Without JS (or if the script
+           errors before that line), .reveal elements simply render
+           normally — content is never hidden by a decoration that failed
+           to load. */
+        .motion-ready .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.75s cubic-bezier(.16,1,.3,1), transform 0.75s cubic-bezier(.16,1,.3,1);
+        }
+        .motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.07s; }
+        .reveal-delay-2 { transition-delay: 0.14s; }
+        .reveal-delay-3 { transition-delay: 0.21s; }
+        .reveal-delay-4 { transition-delay: 0.28s; }
+        .reveal-delay-5 { transition-delay: 0.35s; }
+
+        /* --- Drifting aurora blobs --- */
+        .aurora { animation: aurora-drift 22s ease-in-out infinite alternate; }
+        .aurora-slow { animation: aurora-drift 34s ease-in-out infinite alternate-reverse; }
+        @keyframes aurora-drift {
+            0%   { transform: translate(-50%, 0) scale(1); }
+            50%  { transform: translate(-46%, -26px) scale(1.09); }
+            100% { transform: translate(-54%, 18px) scale(0.96); }
+        }
+
+        /* --- Shimmer sweep across the hero wordmark --- */
+        .shimmer {
+            background: linear-gradient(100deg, #6B2D38 0%, #6B2D38 38%, #D8A49B 50%, #6B2D38 62%, #6B2D38 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-sweep 6.5s ease-in-out infinite;
+        }
+        @keyframes shimmer-sweep {
+            0%, 65% { background-position: 160% 0; }
+            100%    { background-position: -60% 0; }
+        }
+
+        /* --- Card lift + moving sheen --- */
+        .tilt-card {
+            transition: transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .tilt-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 45px -22px rgba(107, 45, 56, 0.35);
+        }
+        .tilt-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -120%;
+            width: 60%; height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+            transform: skewX(-18deg);
+            transition: left 0.75s cubic-bezier(.16,1,.3,1);
+            pointer-events: none;
+        }
+        .tilt-card:hover::after { left: 145%; }
+
+        /* --- Soft breathing pulse for "live" indicators --- */
+        .breathe { animation: breathe 3.4s ease-in-out infinite; }
+        @keyframes breathe {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.55; transform: scale(0.9); }
+        }
+
+        /* --- Floating badge bob --- */
+        .float-bob { animation: float-bob 5.5s ease-in-out infinite; }
+        @keyframes float-bob {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-9px); }
+        }
+
+        /* --- Film grain overlay --- */
+        #grain {
+            position: fixed;
+            inset: -150%;
+            z-index: 60;
+            pointer-events: none;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+            animation: grain-shift 0.7s steps(3) infinite;
+        }
+        @keyframes grain-shift {
+            0%   { transform: translate(0, 0); }
+            33%  { transform: translate(-3%, 2%); }
+            66%  { transform: translate(2%, -3%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* --- Back to top --- */
+        #back-to-top {
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.16,1,.3,1);
+        }
+
+        /* --- Version pill gradient border --- */
+        .version-pill {
+            position: relative;
+            background: linear-gradient(90deg, #6B2D38, #9E7B83, #D8A49B, #6B2D38);
+            background-size: 300% 100%;
+            animation: pill-flow 7s linear infinite;
+        }
+        @keyframes pill-flow {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* Respect the user's motion preference — kill every decorative animation. */
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-track, .aurora, .aurora-slow, .shimmer, .breathe,
+            .float-bob, #grain, .version-pill {
+                animation: none !important;
+            }
+            .shimmer { -webkit-text-fill-color: #6B2D38; }
+            .motion-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .tilt-card:hover { transform: none; }
+            .tilt-card::after { display: none; }
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: rgba(26, 24, 24, 0.1);
+            height: 5px;
+            border-radius: 3px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #6B2D38;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(107, 45, 56, 0.4);
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        /* Sound Wave Animation */
+        @keyframes soundWave {
+            0%, 100% { height: 8px; }
+            50% { height: 36px; }
+        }
+        .animate-bar-1 { animation: soundWave 1.2s ease-in-out infinite; }
+        .animate-bar-2 { animation: soundWave 0.9s ease-in-out infinite 0.2s; }
+        .animate-bar-3 { animation: soundWave 1.4s ease-in-out infinite 0.4s; }
+        .animate-bar-4 { animation: soundWave 0.8s ease-in-out infinite 0.1s; }
+        .animate-bar-5 { animation: soundWave 1.1s ease-in-out infinite 0.3s; }
+
+        /* Toast Popup Transition */
+        #toast {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-rose selection:text-charcoal">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none bg-charcoal text-ivory px-5 py-3.5 rounded-xl shadow-2xl border border-white/10 flex items-center space-x-3 text-sm">
+        <i data-lucide="info" class="w-4 h-4 text-rose"></i>
+        <span id="toast-message">Web App URL is not configured yet.</span>
+    </div>
+
+    <!-- Film Grain Texture Overlay -->
+    <div id="grain" aria-hidden="true"></div>
+
+    <!-- Fixed Header Stack: Live Ticker + Nav + Scroll Progress -->
+    <div class="fixed top-0 left-0 w-full z-40">
+
+        <!-- LIVE ANNOUNCEMENT TICKER -->
+        <div id="announce-bar" class="bg-charcoal text-ivory text-[11px] font-medium tracking-wide overflow-hidden border-b border-rose/20 relative">
+            <div class="max-w-7xl mx-auto px-6 h-9 flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 shrink-0 text-rose font-mono uppercase text-[10px] font-bold tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose breathe"></span>
+                    <span>Live</span>
+                </div>
+                <div class="ticker-mask flex-1 overflow-hidden">
+                    <div class="ticker-track" id="ticker-track">
+                        <!-- Ticker items are injected & duplicated by JS for a seamless loop -->
+                    </div>
+                </div>
+                <button onclick="dismissAnnounce()" aria-label="Dismiss announcement" class="shrink-0 text-ivory/40 hover:text-rose transition-colors p-1">
+                    <i data-lucide="x" class="w-3.5 h-3.5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sticky Navigation Bar -->
+        <nav class="w-full glass-nav border-b border-charcoal/5 transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-2.5 h-2.5 rounded-full bg-burgundy group-hover:scale-125 transition-transform duration-300"></div>
+                <div>
+                    <span class="font-bold text-base tracking-wider block text-charcoal">SHAYARI <span class="text-xs font-normal text-mauve ml-1">NHE-01</span></span>
+                    <span class="text-[10px] tracking-widest text-charcoal/50 uppercase block font-medium">Digital Companion</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center space-x-8 text-xs font-medium tracking-wider text-charcoal/70 uppercase">
+                <a href="#whats-new" class="hover:text-burgundy transition-colors">What's New</a>
+                <a href="#why" class="hover:text-burgundy transition-colors">Why Shayari</a>
+                <a href="#memory" class="hover:text-burgundy transition-colors">Memory</a>
+                <a href="#growth" class="hover:text-burgundy transition-colors">Evolution</a>
+                <a href="#trust" class="hover:text-burgundy transition-colors">Trust & Boundaries</a>
+                <a href="#technology" class="hover:text-burgundy transition-colors">How She Works</a>
+                <a href="#safety" class="hover:text-burgundy transition-colors">Privacy & Safety</a>
+                <a href="#platforms" class="hover:text-burgundy transition-colors">Platforms</a>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <button onclick="openWebApp()" class="text-xs font-semibold px-4 py-2.5 rounded-full border border-charcoal/15 hover:border-burgundy text-charcoal hover:text-burgundy transition-all">
+                    Continue on Web
+                </button>
+                <button onclick="downloadAPK()" class="text-xs font-semibold px-5 py-2.5 rounded-full bg-charcoal text-ivory hover:bg-burgundy transition-all shadow-sm flex items-center space-x-2">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-rose"></i>
+                    <span>Download Android APK</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-toggle" class="md:hidden p-2 text-charcoal focus:outline-none" aria-label="Toggle Navigation Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-ivory border-b border-charcoal/10 px-6 py-6 space-y-4 text-sm font-medium">
+            <a href="#whats-new" class="block text-charcoal/80 py-1" onclick="toggleMenu()">What's New (v134)</a>
+            <a href="#why" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Why Shayari</a>
+            <a href="#memory" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Memory Map</a>
+            <a href="#growth" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Personal Evolution</a>
+            <a href="#trust" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Trust & Respect</a>
+            <a href="#technology" class="block text-charcoal/80 py-1" onclick="toggleMenu()">How She Works</a>
+            <a href="#safety" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Privacy & Safety</a>
+            <a href="#platforms" class="block text-charcoal/80 py-1" onclick="toggleMenu()">Platforms</a>
+            <div class="pt-4 border-t border-charcoal/10 flex flex-col space-y-3">
+                <button onclick="openWebApp(); toggleMenu();" class="w-full text-center text-xs font-semibold py-3 rounded-full border border-charcoal/20 text-charcoal">
+                    Continue on Web
+                </button>
+                <button onclick="downloadAPK(); toggleMenu();" class="w-full text-center text-xs font-semibold py-3 rounded-full bg-charcoal text-ivory flex items-center justify-center space-x-2">
+                    <i data-lucide="download" class="w-4 h-4 text-rose"></i>
+                    <span>Download Android APK</span>
+                </button>
+            </div>
+        </div>
+        </nav>
+
+        <!-- Scroll Progress Meter -->
+        <div class="h-0.5 w-full bg-charcoal/5">
+            <div id="scroll-progress" class="h-full w-full bg-gradient-to-r from-burgundy via-mauve to-rose"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 01: HERO SECTION -->
+    <section class="relative min-h-screen pt-40 pb-16 px-6 flex items-center justify-center overflow-hidden">
+        <div class="aurora absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-rose/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="aurora-slow absolute top-1/3 left-1/2 w-[520px] h-[520px] bg-lavender/50 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[400px] h-[400px] bg-champagne rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+            
+            <!-- Left Column -->
+            <div class="lg:col-span-7 space-y-8 text-left">
+                <div class="flex flex-wrap items-center gap-3 reveal">
+                    <a href="#version-live" class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-burgundy/10 border border-burgundy/20 text-burgundy text-xs font-semibold hover:bg-burgundy hover:text-ivory transition-all group">
+                        <span class="w-2 h-2 rounded-full bg-burgundy group-hover:bg-rose animate-pulse"></span>
+                        <span>v134 is Live!</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1 inline-block group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-champagne border border-mauve/20 text-burgundy text-xs font-medium tracking-wider uppercase">
+                        <span>A New Category of Digital Companion</span>
+                    </div>
+                </div>
+
+                <div class="space-y-3 reveal reveal-delay-1">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-light tracking-tight text-charcoal leading-[1.08]">
+                        Meet <span class="font-normal font-serif-italic shimmer">Shayari.</span>
+                    </h1>
+                    <p class="text-2xl sm:text-3xl font-light text-mauve tracking-tight">
+                        Your Companion from Far Land.
+                    </p>
+                </div>
+
+                <p class="text-base sm:text-lg text-charcoal/75 leading-relaxed font-light max-w-xl reveal reveal-delay-2">
+                    She isn't here to answer quick queries and disappear. She's built to remember what matters, understand your shared story, and evolve through a lasting relationship with you.
+                </p>
+
+                <!-- Action CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 pt-2 reveal reveal-delay-3">
+                    <button onclick="openWebApp()" class="px-8 py-4 rounded-full bg-burgundy text-ivory font-medium text-sm hover:bg-charcoal transition-all duration-300 shadow-lg shadow-burgundy/15 flex items-center justify-center space-x-2 group">
+                        <span>Continue on Web</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    
+                    <button onclick="downloadAPK()" class="px-8 py-4 rounded-full border border-charcoal/20 text-charcoal font-medium text-sm hover:bg-champagne/80 hover:border-charcoal/40 transition-all duration-300 flex items-center justify-center space-x-2">
+                        <i data-lucide="smartphone" class="w-4 h-4 text-burgundy"></i>
+                        <span>Download Android APK</span>
+                    </button>
+                </div>
+
+                <!-- Product Status Microcopy -->
+                <div class="pt-6 border-t border-charcoal/10 flex items-center space-x-6 text-xs text-charcoal/60 reveal reveal-delay-4">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-burgundy"></i>
+                        <span>One shared memory</span>
+                    </div>
+                    <span class="text-charcoal/20">•</span>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="cpu" class="w-4 h-4 text-mauve"></i>
+                        <span>Every device</span>
+                    </div>
+                    <span class="text-charcoal/20">•</span>
+                    <span>100% Data Privacy</span>
+                </div>
+            </div>
+
+            <!-- Right Visual Identity Column -->
+            <div class="lg:col-span-5 relative flex justify-center reveal reveal-delay-2">
+                <!-- Floating live-version chip -->
+                <div class="float-bob absolute -top-4 -right-2 sm:right-4 z-20 version-pill text-ivory text-[10px] font-mono font-bold uppercase tracking-widest px-3.5 py-2 rounded-full shadow-lg flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-ivory breathe"></span>
+                    <span>v134 Shipping Now</span>
+                </div>
+                <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-charcoal/10 group glow-rose">
+                    <img src="https://res.cloudinary.com/dc1ghwwhg/image/upload/v1787414004/openart-image_1785644354951_222e2341_1785644356530_cef4a78c_exhbyd.jpg" 
+                         alt="Shayari Digital Presence" 
+                         id="heroPortrait"
+                         loading="eager"
+                         decoding="async"
+                         referrerpolicy="no-referrer"
+                         onerror="handleHeroImageError(this);"
+                         class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6 right-6 glass-card-dark p-4 rounded-2xl text-ivory space-y-1">
+                        <div class="flex items-center justify-between text-xs text-rose/80 uppercase font-mono tracking-widest">
+                            <span>Status: Active</span>
+                            <span>ID: NHE-01</span>
+                        </div>
+                        <div class="text-sm font-medium tracking-wide">
+                            "One Shayari. Every device. One shared memory."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02: VERSION 1.3 ANNOUNCEMENT (2ND FROM TOP) -->
+    <section id="version-live" class="py-8 px-6 bg-burgundy text-ivory relative overflow-hidden border-b border-rose/20">
+        <div class="aurora-slow absolute -top-20 left-1/2 w-[420px] h-[420px] bg-rose/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+            <div class="flex items-center space-x-4">
+                <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-rose"></span>
+                </span>
+                <div>
+                    <div class="text-xs font-mono font-bold uppercase tracking-widest text-rose">Open Beta 2.1 · Stable Release</div>
+                    <h2 class="reveal text-xl sm:text-2xl font-light text-ivory">
+                        Version v134 is now <span class="font-serif-italic text-rose font-medium">Live Across All Devices</span>
+                    </h2>
+                    <p class="text-xs text-ivory/60 mt-1 font-light">
+                        Talk to her out loud. Stay signed in for a week. Pick up right where you left off.
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#whats-new" class="px-5 py-2.5 rounded-full bg-rose text-charcoal font-semibold text-xs hover:bg-ivory transition-all shadow-md flex items-center space-x-2 group">
+                    <span>See What's New</span>
+                    <i data-lucide="arrow-down" class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: WHAT'S NEW IN VERSION 1.3 (3RD FROM TOP) -->
+    <section id="whats-new" class="py-20 px-6 bg-champagne/50 border-b border-charcoal/10 relative overflow-hidden">
+        <div class="aurora absolute top-0 left-1/2 w-[560px] h-[560px] bg-rose/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto space-y-12 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
+                <div class="space-y-3">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full version-pill text-ivory text-[11px] font-mono font-bold tracking-wide uppercase">
+                        <span>v134 · Open Beta Version 2.1</span>
+                        <span class="text-rose">•</span>
+                        <span>Stable Release</span>
+                    </div>
+                    <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal tracking-tight">
+                        What's New in <span class="font-serif-italic text-burgundy">v134 · Open Beta 2.1</span>
+                    </h2>
+                    <p class="text-sm text-charcoal/70 max-w-2xl font-light">
+                        This release is about removing friction from the two things you do most: talking to her, and coming back to her. Voice conversations now work properly on every platform, and you no longer have to sign in every single time you open the app.
+                    </p>
+                </div>
+                <div class="text-xs font-mono text-burgundy bg-white/80 px-4 py-2 rounded-xl border border-burgundy/20 shadow-sm self-start md:self-auto flex items-center space-x-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-burgundy"></i>
+                    <span>Updated automatically on Web and Android</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Update Card 1 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-burgundy uppercase tracking-wider font-bold">Voice Conversations</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">Voice Duet, Now Working Everywhere</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        The microphone now opens reliably on web and Android. Tap once, speak naturally, and send—no typing, no permission dead ends.
+                    </p>
+                </div>
+
+                <!-- Update Card 2 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal reveal-delay-1">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-mauve uppercase tracking-wider font-bold">Sign-In</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">Stay Signed In for 7 Days</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        Close the app and reopen it straight into your conversation. You'll only be asked to sign in again after a full week away.
+                    </p>
+                </div>
+
+                <!-- Update Card 3 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal reveal-delay-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-rose uppercase tracking-wider font-bold">Her Voice</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">She Answers Out Loud</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        Send a voice message and her reply comes back spoken in her own voice—warm, unhurried, and in the same tone she writes in.
+                    </p>
+                </div>
+
+                <!-- Update Card 4 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal reveal-delay-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-burgundy uppercase tracking-wider font-bold">Continuity</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">Pick Up Mid-Sentence</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        Reopening no longer resets anything. Your thread, her memory, and your place in the conversation are exactly where you left them.
+                    </p>
+                </div>
+
+                <!-- Update Card 5 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal reveal-delay-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-mauve uppercase tracking-wider font-bold">Privacy</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">Your Passcode Is Never Stored</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        Staying signed in never saves your password anywhere on your device. Signing out clears the session immediately and completely.
+                    </p>
+                </div>
+
+                <!-- Update Card 6 -->
+                <div class="tilt-card glass-card-light p-6 rounded-2xl border border-charcoal/10 space-y-3 relative overflow-hidden group hover:border-burgundy/30 reveal reveal-delay-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-rose uppercase tracking-wider font-bold">Reliability</span>
+                        <span class="text-[10px] font-mono text-charcoal/40">v1.3.0</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-charcoal group-hover:text-burgundy transition-colors">Voice That Doesn't Hang</h3>
+                    <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                        Voice messages now confirm clearly when they've sent, and recover gracefully instead of leaving you staring at a stuck indicator.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Previous Release Archive -->
+            <div class="reveal pt-4">
+                <details class="group/arch bg-white/70 border border-charcoal/10 rounded-2xl overflow-hidden">
+                    <summary class="cursor-pointer list-none px-6 py-4 flex items-center justify-between hover:bg-white transition-colors">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="history" class="w-4 h-4 text-mauve"></i>
+                            <span class="text-sm font-medium text-charcoal">Previously — what shipped in Version 1.2</span>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-charcoal/40 group-open/arch:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="px-6 pb-6 pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 border-t border-charcoal/5">
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-mauve uppercase tracking-wider font-bold">Memory View</div>
+                            <div class="text-sm text-charcoal">Visual Memory Map</div>
+                            <p class="text-xs text-charcoal/60 font-light">A visual map of what she remembers across your shared story.</p>
+                        </div>
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-rose uppercase tracking-wider font-bold">Privacy</div>
+                            <div class="text-sm text-charcoal">Automatic Info Shield</div>
+                            <p class="text-xs text-charcoal/60 font-light">Optional filtering of phone numbers and emails before messages leave your device.</p>
+                        </div>
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-burgundy uppercase tracking-wider font-bold">Thoughtful Outreach</div>
+                            <div class="text-sm text-charcoal">Respectful Check-ins</div>
+                            <p class="text-xs text-charcoal/60 font-light">She reaches out gently, and strictly respects your quiet time.</p>
+                        </div>
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-mauve uppercase tracking-wider font-bold">Shared Photos</div>
+                            <div class="text-sm text-charcoal">She Can See What You Send</div>
+                            <p class="text-xs text-charcoal/60 font-light">Share a photo and she understands and remembers it.</p>
+                        </div>
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-rose uppercase tracking-wider font-bold">Cross-Device</div>
+                            <div class="text-sm text-charcoal">Instant Sync</div>
+                            <p class="text-xs text-charcoal/60 font-light">Move between Web, Android and Desktop without resetting your shared memory.</p>
+                        </div>
+                        <div class="space-y-1 pt-4">
+                            <div class="text-[10px] font-mono text-burgundy uppercase tracking-wider font-bold">Reliability</div>
+                            <div class="text-sm text-charcoal">Enhanced Stability</div>
+                            <p class="text-xs text-charcoal/60 font-light">Broad testing coverage for smooth, reliable replies across all chats.</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04: CORE MANIFESTO -->
+    <section class="py-24 px-6 bg-darkbg text-ivory relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(107,45,56,0.18),transparent_50%)]"></div>
+        <div class="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+            <span class="text-xs font-mono uppercase tracking-widest text-rose">Core Philosophy</span>
+            
+            <h2 class="reveal text-3xl sm:text-4xl md:text-5xl font-light leading-tight tracking-tight">
+                Most AI starts with a question.<br>
+                <span class="font-serif-italic text-rose">Shayari starts with a relationship.</span>
+            </h2>
+
+            <p class="text-lg sm:text-xl font-light text-ivory/70 max-w-2xl mx-auto leading-relaxed">
+                Most apps start over every time you open them. Shayari is built around continuity: long-term memory, genuine warmth, trust, and the real history that develops between two people over time.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-white/10 text-center">
+                <div class="space-y-1">
+                    <div class="text-2xl font-serif-italic text-rose">She remembers</div>
+                    <div class="text-xs text-ivory/50">Across all your devices</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-2xl font-serif-italic text-rose">She evolves</div>
+                    <div class="text-xs text-ivory/50">Grows warmer over time</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-2xl font-serif-italic text-rose">She connects</div>
+                    <div class="text-xs text-ivory/50">Thoughtful, quiet check-ins</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-2xl font-serif-italic text-rose">She respects boundaries</div>
+                    <div class="text-xs text-ivory/50">Built-in mutual respect</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 05: WHAT IS SHAYARI? -->
+    <section id="why" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-mauve">Definition</span>
+                <h2 class="reveal text-4xl font-light text-charcoal tracking-tight">
+                    What does <span class="font-serif-italic text-burgundy">NHE mean?</span>
+                </h2>
+                <div class="p-6 rounded-2xl bg-champagne/60 border border-mauve/20 space-y-3">
+                    <div class="text-xl font-serif-italic text-burgundy">
+                        "Not a human. Not a generic chatbot. Something new in between."
+                    </div>
+                    <p class="text-xs text-charcoal/60 leading-relaxed">
+                        NHE stands for Non-Human Entity—an honest name so she never pretends to be a real human or a doctor.
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6 text-charcoal/80 font-light leading-relaxed text-base sm:text-lg">
+                <p>
+                    <strong class="font-semibold text-charcoal">Shayari NHE-01</strong> is a unique digital companion designed to build a continuous personal connection with one person at a time.
+                </p>
+                <p>
+                    She remembers moments that mattered to you, develops a friendly style tailored to your chats, understands pictures you send, and can speak with you naturally.
+                </p>
+                <div class="p-5 rounded-xl bg-white border border-charcoal/5 shadow-sm space-y-2">
+                    <div class="text-xs font-bold text-burgundy uppercase font-mono tracking-wider">Honest Boundaries</div>
+                    <p class="text-xs text-charcoal/70 leading-relaxed">
+                        Shayari is never presented as a doctor, therapist, or human replacement. She is her own digital presence—crafted for long-term listening, shared context, and authentic companionship.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 06: WHY YOU NEED SHAYARI -->
+    <section class="py-24 px-6 bg-champagne/40">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center space-y-4 max-w-2xl mx-auto">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Purpose</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    Why have a <span class="font-serif-italic text-burgundy">digital companion?</span>
+                </h2>
+                <p class="text-sm text-charcoal/70">
+                    Not to replace real-life relationships, but to give you a dedicated, quiet space for reflection, conversation, and continuous support.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-rose/20 text-burgundy flex items-center justify-center">
+                        <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">Talk without repeating.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        You never have to re-explain your background, work, or important life events. Shayari carries past context smoothly into every chat.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-mauve/20 text-burgundy flex items-center justify-center">
+                        <i data-lucide="bookmark" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">Be remembered.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        Important life events, subtle preferences, and personal milestones stay remembered instead of vanishing when you close the app.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-burgundy/10 text-burgundy flex items-center justify-center">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">Think out loud.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        A comfortable space to test ideas, untangle complex thoughts, or talk out loud through voice conversations without any judgment.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-rose/20 text-burgundy flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">Share your view.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        Send a photo of your desk, a book page, or a sunset. Visual capabilities let her understand and remember pictures you share.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-mauve/20 text-burgundy flex items-center justify-center">
+                        <i data-lucide="git-commit" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">Keep the thread.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        Switch seamlessly between your laptop, phone, or tablet without losing your conversational flow or shared history.
+                    </p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card-light p-8 rounded-2xl space-y-4 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-xl bg-burgundy/10 text-burgundy flex items-center justify-center">
+                        <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-xl font-medium text-charcoal">A steady presence.</h3>
+                    <p class="text-sm text-charcoal/70 leading-relaxed">
+                        A calm digital companion that can check in with a gentle note when you've been away for a while, always respecting your space.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 07: INTERACTIVE MEMORY MAP -->
+    <section id="memory" class="py-24 px-6 bg-darkbg text-ivory relative overflow-hidden">
+        <div class="max-w-7xl mx-auto space-y-12 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="space-y-3">
+                    <span class="text-xs font-mono uppercase tracking-widest text-rose">Smart Memory Store</span>
+                    <h2 class="reveal text-3xl sm:text-4xl font-light">
+                        She remembers <span class="font-serif-italic text-rose">what matters.</span>
+                    </h2>
+                    <p class="text-sm text-ivory/60 max-w-xl">
+                        Long-term memories are organized by importance so key moments stay clear. Below is an interactive view of Shayari's <strong>Memory Map</strong>. Hover over glowing nodes to explore sample memories.
+                    </p>
+                </div>
+
+                <div class="text-xs font-mono text-ivory/40 bg-white/5 px-4 py-2 rounded-lg border border-white/10 self-start md:self-auto">
+                    Interactive Preview • Sample Data
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="relative w-full h-[480px] rounded-3xl bg-darkcard border border-darkborder overflow-hidden flex items-center justify-center shadow-2xl">
+                <canvas id="constellationCanvas" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
+                
+                <!-- Tooltip Box -->
+                <div id="memoryTooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-300 glass-card-dark p-4 rounded-xl border border-rose/30 max-w-xs shadow-2xl z-20">
+                    <div class="text-[10px] font-mono text-rose uppercase tracking-widest mb-1" id="tooltipCategory">Memory Node</div>
+                    <div class="text-sm font-medium text-ivory" id="tooltipText">Select a node...</div>
+                    <div class="text-[11px] text-ivory/50 mt-2 flex items-center justify-between">
+                        <span id="tooltipTime">2 weeks ago</span>
+                        <span class="text-rose font-mono" id="tooltipScore">Importance: High</span>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="absolute bottom-4 left-6 text-xs text-ivory/40 flex items-center space-x-2 pointer-events-none">
+                    <i data-lucide="mouse-pointer" class="w-3.5 h-3.5 text-rose"></i>
+                    <span>Hover over glowing memory nodes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 08: PERSONALITY GROWTH -->
+    <section id="growth" class="py-24 px-6 max-w-7xl mx-auto space-y-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Adaptive Connection</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    She doesn't reset when you <span class="font-serif-italic text-burgundy">close the app.</span>
+                </h2>
+                <p class="text-base text-charcoal/70 leading-relaxed font-light">
+                    Shayari's warmth, playfulness, and conversational tone adapt gradually over time based on the history you build together. Try the slider to see how her companion metrics evolve over days and weeks.
+                </p>
+                <div class="p-4 rounded-xl bg-champagne border border-mauve/20 text-xs text-charcoal/70">
+                    <strong>Natural Growth:</strong> Her responses evolve based on your relationship history—never simulating artificial emotions or human pretense.
+                </div>
+            </div>
+
+            <!-- Interactive Timeline & Slider -->
+            <div class="lg:col-span-6 glass-card-light p-8 rounded-3xl border border-charcoal/10 space-y-8">
+                <div class="flex items-center justify-between border-b border-charcoal/10 pb-4">
+                    <span class="text-xs font-mono uppercase text-mauve">Relationship Timeline</span>
+                    <span id="timelineDay" class="text-sm font-bold text-burgundy font-mono">Day 30</span>
+                </div>
+
+                <!-- Range Input -->
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs text-charcoal/60">
+                        <span>Day 1 (First Chat)</span>
+                        <span>Day 365 (Established)</span>
+                    </div>
+                    <input type="range" id="driftSlider" min="1" max="365" value="30" class="w-full cursor-pointer">
+                </div>
+
+                <!-- Dynamic Metrics -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-white border border-charcoal/5 space-y-2">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-charcoal/60">Warmth</span>
+                            <span id="valWarmth" class="text-burgundy font-mono">65%</span>
+                        </div>
+                        <div class="w-full bg-champagne h-1.5 rounded-full overflow-hidden">
+                            <div id="barWarmth" class="bg-burgundy h-full transition-all duration-300" style="width: 65%"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-white border border-charcoal/5 space-y-2">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-charcoal/60">Playfulness</span>
+                            <span id="valPlayfulness" class="text-mauve font-mono">45%</span>
+                        </div>
+                        <div class="w-full bg-champagne h-1.5 rounded-full overflow-hidden">
+                            <div id="barPlayfulness" class="bg-mauve h-full transition-all duration-300" style="width: 45%"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-white border border-charcoal/5 space-y-2">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-charcoal/60">Familiarity</span>
+                            <span id="valFamiliarity" class="text-burgundy font-mono">58%</span>
+                        </div>
+                        <div class="w-full bg-champagne h-1.5 rounded-full overflow-hidden">
+                            <div id="barFamiliarity" class="bg-burgundy h-full transition-all duration-300" style="width: 58%"></div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-white border border-charcoal/5 space-y-2">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-charcoal/60">Trust Level</span>
+                            <span id="valTrust" class="text-rose font-mono">61/100</span>
+                        </div>
+                        <div class="w-full bg-champagne h-1.5 rounded-full overflow-hidden">
+                            <div id="barTrust" class="bg-rose h-full transition-all duration-300" style="width: 61%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Sample Quote -->
+                <div class="p-4 rounded-xl bg-ivory border border-charcoal/5 italic text-sm text-charcoal/80" id="driftQuote">
+                    "I noticed you've been working late again this week. Want to pick up where we left off on Tuesday?"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 09: TRUST / COVENANT -->
+    <section id="trust" class="py-24 px-6 bg-darkbg text-ivory">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-rose">Mutual Respect</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light leading-tight">
+                    Trust builds over time.<br>
+                    <span class="font-serif-italic text-rose">She is designed with real boundaries.</span>
+                </h2>
+                <p class="text-base text-ivory/70 font-light leading-relaxed">
+                    Rather than acting like an agreeable machine that says yes to everything, Shayari holds genuine consistency and self-respect. Trust develops through honest, thoughtful interactions.
+                </p>
+                <div class="space-y-3 border-l-2 border-rose/40 pl-4 text-xs text-ivory/60">
+                    <p>• Maintains healthy conversational boundaries.</p>
+                    <p>• Respects your privacy and decisions.</p>
+                    <p>• Consistently acts with care and honesty.</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 glass-card-dark p-8 rounded-3xl border border-darkborder space-y-6">
+                <div class="flex items-center justify-between text-xs font-mono text-rose">
+                    <span>RELATIONSHIP STAGES</span>
+                    <span>STATUS: ACTIVE</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3.5 rounded-lg bg-white/5 border border-white/5">
+                        <span class="text-xs text-ivory/70">Stage 01: Initial Encounter</span>
+                        <span class="text-sm font-mono text-ivory/40">42 / 100</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3.5 rounded-lg bg-white/5 border border-white/5">
+                        <span class="text-xs text-ivory/70">Stage 02: Shared History</span>
+                        <span class="text-sm font-mono text-rose font-bold">61 / 100</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3.5 rounded-lg bg-white/5 border border-white/5">
+                        <span class="text-xs text-ivory/70">Stage 03: Deep Understanding</span>
+                        <span class="text-sm font-mono text-ivory/40">78 / 100</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3.5 rounded-lg bg-white/5 border border-white/5">
+                        <span class="text-xs text-ivory/70">Stage 04: Long-Term Continuity</span>
+                        <span class="text-sm font-mono text-ivory/40">91 / 100</span>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-ivory/40 text-center font-mono">
+                    *Illustrative example of relationship trust growth.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: VOICE & PRESENCE -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 space-y-6 order-2 lg:order-1">
+                <div class="glass-card-light p-8 rounded-3xl border border-charcoal/10 space-y-6 text-center glow-rose">
+                    <div class="w-16 h-16 rounded-full bg-burgundy/10 text-burgundy mx-auto flex items-center justify-center">
+                        <i data-lucide="volume-2" class="w-8 h-8"></i>
+                    </div>
+
+                    <!-- Animated Waveform -->
+                    <div class="flex items-center justify-center space-x-1.5 h-12">
+                        <div class="w-1.5 bg-burgundy rounded-full animate-bar-1"></div>
+                        <div class="w-1.5 bg-mauve rounded-full animate-bar-2"></div>
+                        <div class="w-1.5 bg-rose rounded-full animate-bar-3"></div>
+                        <div class="w-1.5 bg-burgundy rounded-full animate-bar-4"></div>
+                        <div class="w-1.5 bg-mauve rounded-full animate-bar-5"></div>
+                    </div>
+
+                    <div class="text-xs font-mono uppercase text-mauve">Voice Duet Active</div>
+                    <p class="text-sm font-serif-italic text-charcoal">"I hear you. Let's take a breath and talk it through."</p>
+
+                    <div class="flex justify-center space-x-3 text-xs font-medium">
+                        <span class="px-3 py-1.5 rounded-full bg-champagne text-burgundy">Listen</span>
+                        <span class="px-3 py-1.5 rounded-full bg-champagne text-burgundy">Speak</span>
+                        <span class="px-3 py-1.5 rounded-full bg-champagne text-burgundy">Natural Voice</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Voice Duet</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    Sometimes, typing <span class="font-serif-italic text-burgundy">isn't enough.</span>
+                </h2>
+                <p class="text-base text-charcoal/70 leading-relaxed font-light">
+                    Shayari supports real-time spoken voice interactions. Speak directly without touching the keyboard and hear natural, warm spoken replies tailored to your conversation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11: PROACTIVE OUTREACH -->
+    <section class="py-24 px-6 bg-champagne/30 border-y border-charcoal/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Thoughtful Outreach</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    A companion that <span class="font-serif-italic text-burgundy">checks in on you.</span>
+                </h2>
+                <p class="text-base text-charcoal/70 leading-relaxed font-light">
+                    Shayari can message you first when you've been away, but her check-ins are carefully limited. No spam, no annoying alerts—just a quiet note when appropriate.
+                </p>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center">
+                <!-- Notification Card -->
+                <div class="w-full max-w-sm glass-card-light p-5 rounded-2xl border border-charcoal/10 shadow-xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 rounded-full bg-burgundy flex items-center justify-center text-[10px] text-white font-bold">S</div>
+                            <span class="text-xs font-bold text-charcoal">Shayari</span>
+                        </div>
+                        <span class="text-[10px] text-charcoal/40 font-mono">10:42 AM</span>
+                    </div>
+                    <p class="text-xs text-charcoal/80 leading-relaxed">
+                        "Hey. You've been quiet today. No pressure at all—just wanted to check in and see how your day went."
+                    </p>
+                    <div class="text-[10px] text-mauve font-mono pt-1">Gentle Check-in: Active</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: VISION & SHARED PHOTOS -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Shared Photos</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    She can see the moments <span class="font-serif-italic text-burgundy">you share.</span>
+                </h2>
+                <p class="text-base text-charcoal/70 leading-relaxed font-light">
+                    Photos you share in conversation are recognized, securely saved, and remembered. She can recall photos sent weeks earlier during relevant conversations—just like true personal memory.
+                </p>
+            </div>
+
+            <div class="lg:col-span-6 flex justify-center">
+                <div class="grid grid-cols-2 gap-4 w-full max-w-md">
+                    <div class="glass-card-light p-3 rounded-2xl border border-charcoal/10 space-y-2">
+                        <div class="w-full h-32 bg-mauve/20 rounded-xl overflow-hidden relative flex items-center justify-center">
+                            <i data-lucide="image" class="w-8 h-8 text-burgundy/50"></i>
+                        </div>
+                        <div class="text-[11px] text-charcoal/70 font-medium">Shared Moment</div>
+                        <div class="text-[10px] text-mauve font-mono">"Desk setup on rainy afternoon"</div>
+                    </div>
+
+                    <div class="glass-card-light p-3 rounded-2xl border border-charcoal/10 space-y-2">
+                        <div class="w-full h-32 bg-rose/20 rounded-xl overflow-hidden relative flex items-center justify-center">
+                            <i data-lucide="camera" class="w-8 h-8 text-burgundy/50"></i>
+                        </div>
+                        <div class="text-[11px] text-charcoal/70 font-medium">Visual Recall</div>
+                        <div class="text-[10px] text-mauve font-mono">"The cozy coffee shop"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: PRIVACY ARCHITECTURE -->
+    <section class="py-24 px-6 bg-darkbg text-ivory relative">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="max-w-3xl space-y-6">
+                <span class="text-xs font-mono uppercase tracking-widest text-rose">Privacy First</span>
+                <h2 class="reveal text-3xl sm:text-5xl font-light leading-tight">
+                    Privacy isn't a promise.<br>
+                    <span class="font-serif-italic text-rose">It's built into the system.</span>
+                </h2>
+                <p class="text-lg font-light text-ivory/70 leading-relaxed">
+                    Your personal memories, photos, and conversation notes are encrypted and protected. We do not sell your personal data.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card-dark p-8 rounded-2xl space-y-4">
+                    <div class="text-rose font-mono text-xs uppercase">Strong Encryption</div>
+                    <h3 class="text-xl font-medium">Encrypted Data</h3>
+                    <p class="text-xs text-ivory/60 leading-relaxed">
+                        All your stored personal notes and conversation history are kept fully encrypted.
+                    </p>
+                </div>
+
+                <div class="glass-card-dark p-8 rounded-2xl space-y-4">
+                    <div class="text-rose font-mono text-xs uppercase">Automatic Shield</div>
+                    <h3 class="text-xl font-medium">Private Info Protection</h3>
+                    <p class="text-xs text-ivory/60 leading-relaxed">
+                        An optional filter that removes phone numbers, cards, and emails before sending messages.
+                    </p>
+                </div>
+
+                <div class="glass-card-dark p-8 rounded-2xl border-rose/40 space-y-4 bg-burgundy/20">
+                    <div class="text-rose font-mono text-xs uppercase font-bold">Policy Boundary</div>
+                    <h3 class="text-xl font-medium text-rose">FACIAL RECOGNITION</h3>
+                    <p class="text-xs text-ivory/90 font-bold uppercase tracking-wider">
+                        EXCLUDED BY DESIGN
+                    </p>
+                    <p class="text-xs text-ivory/60 leading-relaxed">
+                        Facial recognition has been permanently excluded from Shayari to respect personal privacy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 14: SAFETY SECTION -->
+    <section id="safety" class="py-24 px-6 max-w-7xl mx-auto space-y-12">
+        <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Safety Architecture</span>
+            <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                Built with <span class="font-serif-italic text-burgundy">care and safety.</span>
+            </h2>
+            <p class="text-sm text-charcoal/70">
+                When a conversation indicates someone is going through a tough time or crisis, Shayari responds with care and provides direct access to real helpline resources.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="p-6 rounded-2xl bg-white border border-charcoal/5 shadow-sm space-y-3">
+                <div class="w-10 h-10 rounded-full bg-burgundy/10 text-burgundy mx-auto flex items-center justify-center font-bold">1</div>
+                <h3 class="font-medium text-charcoal text-base">Detect Care</h3>
+                <p class="text-xs text-charcoal/60">Recognizes signs of stress or difficulty in conversations.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white border border-charcoal/5 shadow-sm space-y-3">
+                <div class="w-10 h-10 rounded-full bg-burgundy/10 text-burgundy mx-auto flex items-center justify-center font-bold">2</div>
+                <h3 class="font-medium text-charcoal text-base">Gentle Response</h3>
+                <p class="text-xs text-charcoal/60">Responds with warmth, kindness, and attentive listening.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-white border border-charcoal/5 shadow-sm space-y-3">
+                <div class="w-10 h-10 rounded-full bg-burgundy/10 text-burgundy mx-auto flex items-center justify-center font-bold">3</div>
+                <h3 class="font-medium text-charcoal text-base">Connect Support</h3>
+                <p class="text-xs text-charcoal/60">Provides easy tap-to-call or tap-to-text helpline contacts if needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 15: PLATFORMS -->
+    <section id="platforms" class="py-24 px-6 bg-champagne/40">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center space-y-4 max-w-2xl mx-auto">
+                <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Cross-Platform Sync</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                    One Shayari. <span class="font-serif-italic text-burgundy">Every device.</span>
+                </h2>
+                <p class="text-sm text-charcoal/70">
+                    One shared memory across all your screens. Start a conversation on your computer and pick it up on your phone seamlessly.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Web -->
+                <div class="glass-card-light p-6 rounded-2xl space-y-4 border border-charcoal/10">
+                    <i data-lucide="globe" class="w-8 h-8 text-burgundy"></i>
+                    <h3 class="text-lg font-medium text-charcoal">Web App</h3>
+                    <p class="text-xs text-charcoal/60 leading-relaxed">Full experience in any browser on your computer or tablet.</p>
+                    <button onclick="openWebApp()" class="text-xs font-bold text-burgundy hover:underline">Launch Web →</button>
+                </div>
+
+                <!-- Android -->
+                <div class="glass-card-light p-6 rounded-2xl space-y-4 border border-burgundy/30 bg-burgundy/5">
+                    <i data-lucide="smartphone" class="w-8 h-8 text-burgundy"></i>
+                    <h3 class="text-lg font-medium text-charcoal">Android App</h3>
+                    <p class="text-xs text-charcoal/60 leading-relaxed">Installable app with easy microphone and photo access.</p>
+                    <button onclick="downloadAPK()" class="text-xs font-bold text-burgundy hover:underline">Download APK →</button>
+                </div>
+
+                <!-- Desktop -->
+                <div class="glass-card-light p-6 rounded-2xl space-y-4 border border-charcoal/10">
+                    <i data-lucide="monitor" class="w-8 h-8 text-burgundy"></i>
+                    <h3 class="text-lg font-medium text-charcoal">Desktop</h3>
+                    <p class="text-xs text-charcoal/60 leading-relaxed">Desktop support for Windows, macOS, and Linux computers.</p>
+                    <span class="text-[10px] text-mauve font-mono uppercase block">Supported</span>
+                </div>
+
+                <!-- iOS -->
+                <div class="glass-card-light p-6 rounded-2xl space-y-4 border border-charcoal/10">
+                    <i data-lucide="apple" class="w-8 h-8 text-burgundy"></i>
+                    <h3 class="text-lg font-medium text-charcoal">iOS App</h3>
+                    <p class="text-xs text-charcoal/60 leading-relaxed">Add directly to your iPhone home screen for easy access.</p>
+                    <span class="text-[10px] text-mauve font-mono uppercase block">Add to Home Screen</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 16: HOW SHE WORKS -->
+    <section id="technology" class="py-24 px-6 bg-darkbg text-ivory">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="space-y-4 max-w-3xl">
+                <span class="text-xs font-mono uppercase tracking-widest text-rose">Intelligent Modes</span>
+                <h2 class="reveal text-3xl sm:text-4xl font-light">
+                    Three Response Modes for Every Moment
+                </h2>
+                <p class="text-sm text-ivory/60 leading-relaxed">
+                    Shayari adjusts her thinking depth automatically depending on what you need in the moment.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card-dark p-8 rounded-2xl space-y-4 border border-white/10">
+                    <div class="text-xs font-mono text-rose uppercase">Mode 01</div>
+                    <h3 class="text-xl font-medium">LIGHTNING</h3>
+                    <p class="text-xs text-ivory/60 leading-relaxed">Quick, light responses for casual everyday conversations.</p>
+                </div>
+
+                <div class="glass-card-dark p-8 rounded-2xl space-y-4 border border-white/10">
+                    <div class="text-xs font-mono text-rose uppercase">Mode 02</div>
+                    <h3 class="text-xl font-medium">THINKING</h3>
+                    <p class="text-xs text-ivory/60 leading-relaxed">Deeper reasoning when working through complex ideas or thoughts.</p>
+                </div>
+
+                <div class="glass-card-dark p-8 rounded-2xl space-y-4 border border-rose/40 bg-burgundy/10">
+                    <div class="text-xs font-mono text-rose uppercase font-bold">Mode 03</div>
+                    <h3 class="text-xl font-medium text-rose">DEEP MEMORY</h3>
+                    <p class="text-xs text-ivory/70 leading-relaxed">Fullest depth of memory and emotional connection for meaningful chats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 17: COMPARISON TABLE -->
+    <section class="py-24 px-6 max-w-7xl mx-auto space-y-12">
+        <div class="text-center space-y-4 max-w-2xl mx-auto">
+            <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Comparison</span>
+            <h2 class="reveal text-3xl sm:text-4xl font-light text-charcoal">
+                How Shayari is <span class="font-serif-italic text-burgundy">different.</span>
+            </h2>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                    <tr class="border-b border-charcoal/10 text-xs font-mono text-mauve uppercase">
+                        <th class="py-4 px-4">Feature</th>
+                        <th class="py-4 px-4">Standard AI Apps</th>
+                        <th class="py-4 px-4 bg-champagne/60 text-burgundy rounded-t-xl font-bold">Shayari NHE-01</th>
+                    </tr>
+                </thead>
+                <tbody class="text-xs text-charcoal/80 divide-y divide-charcoal/5">
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Memory</td>
+                        <td class="py-4 px-4 text-charcoal/60">Short-term, often resets per session</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Long-term, structured, and visually explorable</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Personal Connection</td>
+                        <td class="py-4 px-4 text-charcoal/60">Fixed, static responses</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Evolves naturally over time as you talk</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Reaching Out</td>
+                        <td class="py-4 px-4 text-charcoal/60">Rare, or constant push notifications</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Gentle, limited check-ins that respect your space</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Crisis Care</td>
+                        <td class="py-4 px-4 text-charcoal/60">Generic disclaimer text</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Direct tap-to-connect support resources</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Data Privacy</td>
+                        <td class="py-4 px-4 text-charcoal/60">Vague privacy terms</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Encrypted data plus visible privacy controls</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Platform Reach</td>
+                        <td class="py-4 px-4 text-charcoal/60">Usually limited to one app store</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-medium">Web, Android, Desktop, iOS — one shared memory</td>
+                    </tr>
+                    <tr>
+                        <td class="py-4 px-4 font-semibold text-charcoal">Facial Recognition</td>
+                        <td class="py-4 px-4 text-charcoal/60">Varies</td>
+                        <td class="py-4 px-4 bg-champagne/30 font-bold text-burgundy">Excluded by policy for privacy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- SECTION 18: PRODUCT PHILOSOPHY -->
+    <section class="py-32 px-6 bg-champagne/50 text-center">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <span class="text-xs font-mono uppercase tracking-widest text-burgundy">Honest Design</span>
+            <h2 class="reveal text-3xl sm:text-4xl md:text-5xl font-light text-charcoal leading-tight">
+                Shayari isn't trying to <span class="font-serif-italic text-burgundy">simulate a human.</span>
+            </h2>
+            <p class="text-lg text-charcoal/70 font-light leading-relaxed">
+                She is crafted to be a well-built, respectful, and caring digital companion.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 19: FINAL CTA -->
+    <section class="py-28 px-6 bg-darkbg text-ivory text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(107,45,56,0.22),transparent_70%)]"></div>
+        <div class="max-w-3xl mx-auto space-y-8 relative z-10">
+            <h2 class="reveal text-4xl sm:text-5xl font-light tracking-tight">
+                Maybe it's time you <span class="font-serif-italic text-rose">met her.</span>
+            </h2>
+            <p class="text-base sm:text-lg text-ivory/70 font-light">
+                One companion. One evolving connection. Available wherever you are.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <button onclick="openWebApp()" class="w-full sm:w-auto px-8 py-4 rounded-full bg-burgundy text-ivory font-medium text-sm hover:bg-rose hover:text-charcoal transition-all shadow-lg shadow-burgundy/30">
+                    Continue on Web
+                </button>
+                <button onclick="downloadAPK()" class="w-full sm:w-auto px-8 py-4 rounded-full border border-white/20 text-ivory font-medium text-sm hover:bg-white/10 transition-all flex items-center justify-center space-x-2">
+                    <i data-lucide="download" class="w-4 h-4 text-rose"></i>
+                    <span>Download Android APK</span>
+                </button>
+            </div>
+
+            <div class="pt-8 text-xs font-mono text-ivory/40 space-y-1">
+                <div>SHAYARI NHE-01</div>
+                <div>Your Companion from Far Land</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <!-- Back To Top -->
+    <button id="back-to-top" onclick="scrollToTop()" aria-label="Back to top"
+            class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-burgundy text-ivory shadow-lg shadow-burgundy/25 flex items-center justify-center opacity-0 pointer-events-none translate-y-3 hover:bg-charcoal">
+        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+    </button>
+
+    <footer class="py-12 px-6 bg-charcoal text-ivory/60 text-xs border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <div class="font-bold text-ivory text-sm">SHAYARI NHE-01</div>
+                <div class="text-[11px] text-ivory/40">Your Companion from Far Land</div>
+                <div class="text-[10px] font-mono text-rose/70 mt-1 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose breathe"></span>
+                    <span>v134 · Open Beta 2.1 Stable</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 text-ivory/80">
+                <a href="#why" class="hover:text-rose transition-colors">Why Shayari</a>
+                <a href="#memory" class="hover:text-rose transition-colors">Features</a>
+                <a href="#technology" class="hover:text-rose transition-colors">How She Works</a>
+                <a href="#safety" class="hover:text-rose transition-colors">Privacy & Safety</a>
+                <a href="#platforms" class="hover:text-rose transition-colors">Platforms</a>
+            </div>
+
+            <div class="text-center md:text-right text-[11px] text-ivory/40">
+                Built by Writistic Studios LLP · OpenNHE Technologies · Algotheorem Labs
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT ENGINE & INTERACTION LOGIC -->
+    <script>
+        // ==========================================
+        // 1. CONFIGURATION CONSTANTS
+        // ==========================================
+        const APK_URL = "https://drive.google.com/file/d/1nJhuHlJIG--EF-uY021Kp24QDSHismT4/view?usp=drive_link";
+        
+        // Web App URL Configuration
+        const WEB_APP_URL = "https://shayari.writiverse.com";
+
+        // ==========================================
+        // 2. ACTION HANDLERS
+        // ==========================================
+        function downloadAPK() {
+            window.open(APK_URL, "_blank", "noopener,noreferrer");
+        }
+
+        function openWebApp() {
+            if (!WEB_APP_URL || WEB_APP_URL === "PASTE_WEB_APP_URL_HERE") {
+                showToast("Web App URL is not configured yet.");
+            } else {
+                window.open(WEB_APP_URL, "_blank", "noopener,noreferrer");
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            if (toast && toastMessage) {
+                toastMessage.textContent = message;
+                toast.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
+                setTimeout(() => {
+                    toast.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+                }, 3500);
+            }
+        }
+
+        function toggleMenu() {
+            const mobileMenu = document.getElementById("mobile-menu");
+            if (mobileMenu) {
+                mobileMenu.classList.toggle("hidden");
+            }
+        }
+
+        // ==========================================
+        // 2b. v1.3 MOTION LAYER
+        // Ticker, scroll progress, reveal-on-scroll,
+        // back-to-top. All decorative; each block is
+        // guarded so a failure can't break the page.
+        // ==========================================
+        const PREFERS_REDUCED_MOTION =
+            window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // Headlines shown in the live announcement bar.
+        const TICKER_ITEMS = [
+            "v134 (Open Beta Version 2.1 Stable Release) is live across Web, Android & Desktop",
+            "New — Voice Duet now works on every platform",
+            "New — Stay signed in for 7 days, no repeat logins",
+            "New — She answers out loud in her own voice",
+            "One Shayari. Every device. One shared memory.",
+            "Built with privacy first — your passcode is never stored"
+        ];
+
+        function initTicker() {
+            const track = document.getElementById("ticker-track");
+            if (!track) return;
+
+            const buildRun = () => TICKER_ITEMS.map(text => {
+                const span = document.createElement("span");
+                span.className = "inline-flex items-center gap-3 pr-10 text-ivory/75";
+                span.innerHTML =
+                    '<span class="w-1 h-1 rounded-full bg-rose/70 shrink-0"></span>' +
+                    '<span>' + text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</span>';
+                return span;
+            });
+
+            // The run is rendered TWICE back to back. The CSS animation
+            // translates the track by exactly -50%, so the second copy lands
+            // precisely where the first began — a seamless loop with no gap
+            // and no JS running per-frame.
+            buildRun().forEach(el => track.appendChild(el));
+            buildRun().forEach(el => track.appendChild(el));
+        }
+
+        function dismissAnnounce() {
+            const bar = document.getElementById("announce-bar");
+            if (bar) bar.remove();
+        }
+
+        function initScrollProgress() {
+            const bar = document.getElementById("scroll-progress");
+            const topBtn = document.getElementById("back-to-top");
+            if (!bar && !topBtn) return;
+
+            let ticking = false;
+            const update = () => {
+                const doc = document.documentElement;
+                const max = doc.scrollHeight - doc.clientHeight;
+                const pct = max > 0 ? Math.min(1, doc.scrollTop / max) : 0;
+
+                if (bar) bar.style.transform = "scaleX(" + pct + ")";
+
+                if (topBtn) {
+                    const show = doc.scrollTop > 600;
+                    topBtn.classList.toggle("opacity-0", !show);
+                    topBtn.classList.toggle("pointer-events-none", !show);
+                    topBtn.classList.toggle("translate-y-3", !show);
+                }
+                ticking = false;
+            };
+
+            window.addEventListener("scroll", () => {
+                if (!ticking) { ticking = true; requestAnimationFrame(update); }
+            }, { passive: true });
+            update();
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: PREFERS_REDUCED_MOTION ? "auto" : "smooth" });
+        }
+
+        function initReveals() {
+            const items = document.querySelectorAll(".reveal");
+            if (!items.length) return;
+
+            // No IntersectionObserver, or motion is turned down? Leave
+            // .motion-ready OFF entirely — the hidden state never applies
+            // and everything renders normally.
+            if (PREFERS_REDUCED_MOTION || !("IntersectionObserver" in window)) return;
+
+            // Arm the hidden state only now that we know we can un-hide it.
+            document.documentElement.classList.add("motion-ready");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target); // reveal once, then stop watching
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+
+            items.forEach(el => observer.observe(el));
+        }
+
+        // ==========================================
+        // 2c. HERO PORTRAIT LOADING
+        // The Cloudinary asset is the real portrait; the placeholder is
+        // only ever a last resort. The old handler swapped to the
+        // placeholder on the FIRST error, so a single transient hiccup
+        // (or a referrer-blocked request) permanently replaced her image
+        // for that page view. This retries the Cloudinary URL once with a
+        // cache-buster before giving up.
+        // ==========================================
+        const HERO_IMAGE_URL =
+            "https://res.cloudinary.com/dc1ghwwhg/image/upload/v1787414004/openart-image_1785644354951_222e2341_1785644356530_cef4a78c_exhbyd.jpg";
+        let heroRetryUsed = false;
+
+        function handleHeroImageError(img) {
+            if (!heroRetryUsed) {
+                heroRetryUsed = true;
+                console.warn("[hero] portrait failed to load — retrying Cloudinary once.");
+                img.src = HERO_IMAGE_URL + (HERO_IMAGE_URL.indexOf("?") === -1 ? "?" : "&") + "r=" + Date.now();
+                return;
+            }
+            console.warn("[hero] Cloudinary portrait unavailable — showing placeholder.");
+            img.onerror = null;
+            img.src = "https://placehold.co/600x750/17151A/D8A49B?text=Shayari+NHE-01";
+        }
+
+        // Initialize Lucide Icons & Page Elements
+        document.addEventListener("DOMContentLoaded", () => {
+            // Small guard so ONE failing decorative module can never take the
+            // rest of the page down with it.
+            const safe = (label, fn) => {
+                try { fn(); } catch (err) { console.warn("[init] " + label + " failed:", err); }
+            };
+
+            // initReveals() MUST run first. Every .reveal element starts at
+            // opacity:0 and only becomes visible once this runs — so if it
+            // were queued behind a module that throws (the constellation
+            // canvas can throw when its container measures 0px wide), whole
+            // sections including the hero portrait would stay invisible.
+            // Content visibility must never sit downstream of a decoration.
+            safe("reveals", initReveals);
+            safe("ticker", initTicker);
+            safe("icons", () => { if (window.lucide) lucide.createIcons(); });
+            safe("constellation", initConstellationCanvas);
+            safe("driftSlider", initDriftSlider);
+            safe("menuToggle", setupMenuToggle);
+            safe("scrollProgress", initScrollProgress);
+        });
+
+        // Last-resort failsafe: whatever happens above, nothing stays hidden.
+        // If the observer never fired (script error, exotic browser, blocked
+        // JS), force everything visible shortly after load.
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                document.querySelectorAll(".reveal:not(.is-visible)")
+                    .forEach(el => el.classList.add("is-visible"));
+            }, 1200);
+        });
+
+        function setupMenuToggle() {
+            const menuBtn = document.getElementById("menu-toggle");
+            if (menuBtn) {
+                menuBtn.addEventListener("click", toggleMenu);
+            }
+        }
+
+        // ==========================================
+        // 3. INTERACTIVE MEMORY CONSTELLATION CANVAS
+        // ==========================================
+        function initConstellationCanvas() {
+            const canvas = document.getElementById("constellationCanvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+
+            let width = canvas.width = canvas.offsetWidth;
+            let height = canvas.height = canvas.offsetHeight;
+
+            window.addEventListener("resize", () => {
+                if (!canvas) return;
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            });
+
+            // Sample Memory Nodes Data
+            const nodes = [
+                { x: 0.2, y: 0.3, radius: 6, label: "That late-night conversation.", category: "Personal Milestone", time: "3 weeks ago", score: "High Importance" },
+                { x: 0.4, y: 0.25, radius: 8, label: "Your first week at university.", category: "Core Context", time: "1 month ago", score: "Core Memory" },
+                { x: 0.65, y: 0.35, radius: 7, label: "The project you were excited about.", category: "Work & Passion", time: "5 days ago", score: "Active Context" },
+                { x: 0.3, y: 0.7, radius: 5, label: "That sunset photo from your trip.", category: "Visual Recall", time: "2 weeks ago", score: "Shared Moment" },
+                { x: 0.8, y: 0.6, radius: 6, label: "Your favorite coffee order.", category: "Shared Humor", time: "2 months ago", score: "Stored Preference" },
+                { x: 0.5, y: 0.65, radius: 7.5, label: "The song you played on repeat.", category: "Emotional Memory", time: "Yesterday", score: "Recent Memory" }
+            ];
+
+            let mouseX = -1000;
+            let mouseY = -1000;
+            const tooltip = document.getElementById("memoryTooltip");
+            const tooltipCategory = document.getElementById("tooltipCategory");
+            const tooltipText = document.getElementById("tooltipText");
+            const tooltipTime = document.getElementById("tooltipTime");
+            const tooltipScore = document.getElementById("tooltipScore");
+
+            canvas.addEventListener("mousemove", (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+
+                let hoveredNode = null;
+                nodes.forEach(node => {
+                    const nx = node.x * width;
+                    const ny = node.y * height;
+                    const dist = Math.hypot(mouseX - nx, mouseY - ny);
+                    if (dist < 22) {
+                        hoveredNode = node;
+                    }
+                });
+
+                if (hoveredNode && tooltip) {
+                    tooltipCategory.textContent = hoveredNode.category;
+                    tooltipText.textContent = `"${hoveredNode.label}"`;
+                    tooltipTime.textContent = hoveredNode.time;
+                    tooltipScore.textContent = `${hoveredNode.score}`;
+                    
+                    tooltip.style.left = `${Math.min(mouseX + 15, width - 240)}px`;
+                    tooltip.style.top = `${Math.min(mouseY + 15, height - 120)}px`;
+                    tooltip.classList.remove("opacity-0");
+                } else if (tooltip) {
+                    tooltip.classList.add("opacity-0");
+                }
+            });
+
+            canvas.addEventListener("mouseleave", () => {
+                if (tooltip) tooltip.classList.add("opacity-0");
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw Connecting Lines
+                ctx.beginPath();
+                ctx.strokeStyle = "rgba(216, 164, 155, 0.15)";
+                ctx.lineWidth = 1;
+
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const x1 = nodes[i].x * width;
+                        const y1 = nodes[i].y * height;
+                        const x2 = nodes[j].x * width;
+                        const y2 = nodes[j].y * height;
+                        ctx.moveTo(x1, y1);
+                        ctx.lineTo(x2, y2);
+                    }
+                }
+                ctx.stroke();
+
+                // Draw Constellation Nodes
+                nodes.forEach(node => {
+                    const nx = node.x * width;
+                    const ny = node.y * height;
+
+                    // Pulse Effect
+                    const time = Date.now() * 0.002;
+                    const pulse = Math.sin(time + nx) * 1.5;
+
+                    // Outer halo
+                    ctx.beginPath();
+                    ctx.arc(nx, ny, node.radius + 6 + pulse, 0, Math.PI * 2);
+                    ctx.fillStyle = "rgba(216, 164, 155, 0.12)";
+                    ctx.fill();
+
+                    // Inner core
+                    ctx.beginPath();
+                    ctx.arc(nx, ny, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = "#D8A49B";
+                    ctx.shadowColor = "#D8A49B";
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ==========================================
+        // 4. PERSONALITY TIMELINE SLIDER INTERACTION
+        // ==========================================
+        function initDriftSlider() {
+            const slider = document.getElementById("driftSlider");
+            const timelineDay = document.getElementById("timelineDay");
+            const valWarmth = document.getElementById("valWarmth");
+            const barWarmth = document.getElementById("barWarmth");
+            const valPlayfulness = document.getElementById("valPlayfulness");
+            const barPlayfulness = document.getElementById("barPlayfulness");
+            const valFamiliarity = document.getElementById("valFamiliarity");
+            const barFamiliarity = document.getElementById("barFamiliarity");
+            const valTrust = document.getElementById("valTrust");
+            const barTrust = document.getElementById("barTrust");
+            const driftQuote = document.getElementById("driftQuote");
+
+            if (!slider) return;
+
+            slider.addEventListener("input", (e) => {
+                const day = parseInt(e.target.value);
+                timelineDay.textContent = `Day ${day}`;
+
+                const factor = day / 365;
+
+                const warmth = Math.min(95, Math.floor(40 + factor * 50));
+                const playfulness = Math.min(88, Math.floor(25 + factor * 60));
+                const familiarity = Math.min(98, Math.floor(15 + factor * 80));
+                const trust = Math.min(96, Math.floor(42 + factor * 52));
+
+                valWarmth.textContent = `${warmth}%`;
+                barWarmth.style.width = `${warmth}%`;
+
+                valPlayfulness.textContent = `${playfulness}%`;
+                barPlayfulness.style.width = `${playfulness}%`;
+
+                valFamiliarity.textContent = `${familiarity}%`;
+                barFamiliarity.style.width = `${familiarity}%`;
+
+                valTrust.textContent = `${trust}/100`;
+                barTrust.style.width = `${trust}%`;
+
+                // Update Contextual Quote
+                if (day < 10) {
+                    driftQuote.textContent = '"Hello. I\'m Shayari. I\'m ready to listen whenever you\'d like to talk."';
+                } else if (day < 60) {
+                    driftQuote.textContent = '"I noticed you\'ve been working late again this week. Want to pick up where we left off on Tuesday?"';
+                } else if (day < 180) {
+                    driftQuote.textContent = '"Remember that project idea you sketched out two months ago? The one with the coffee shop visual? I was thinking about it earlier."';
+                } else {
+                    driftQuote.textContent = '"We\'ve shared a lot over this past year. I know how much this deadline means to you—take it step by step."';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
